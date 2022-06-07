@@ -1,4 +1,7 @@
 # Write your code below game_hash
+
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +129,115 @@ def game_hash
   }
 end
 
-# Write code here
+def all_players
+	game_hash[:home][:players] + game_hash[:away][:players]
+end
+
+def find_player(name)
+	all_players.find { |player| player[:player_name] == name }
+end
+
+def num_points_scored(name)
+	find_player(name)[:points]
+end
+
+def shoe_size(name)
+	find_player(name)[:shoe]
+end
+
+def player_stats(name)
+	find_player(name)
+end
+
+def big_shoe_rebounds
+	all_players.sort_by { |player| player[:shoe] }.last[:rebounds]
+end
+
+def team_names
+	[game_hash[:home][:team_name], game_hash[:away][:team_name]]
+end
+
+
+# def find_team(name)
+
+# end
+
+def find_team(name)
+	game_hash.find { |team, data| data[:team_name] == name }[1]
+end
+
+# find_team("Charlotte Hornets")
+
+def team_colors(name)
+	find_team(name)[:colors]
+end
+
+def player_numbers(name)
+	jersey_numbers = []
+	find_team(name)[:players].each do |player|
+		jersey_numbers.push(player[:number])
+	end
+	jersey_numbers
+end
+
+
+binding.pry
+
+# team_colors("Charlotte Hornets")
+
+
+# def find_team(name)
+# 	game_hash.find do |team, data|
+# 		if data[:team_name] == name
+# 			return data
+# 		end
+# 	end
+# end
+
+
+# team_colors("Charlotte Hornets")
+
+# def player_numbers(name)
+# 	game_hash.each do |team, data|
+# 		data.each do |attribute, value|
+# 			if attribute == :team_name && value == name
+# 				data.each do |attribute, value|
+# 					if attribute == :colors
+# 						value
+# 					end
+# 				end
+# 			end
+# 		end
+# 	end
+# end
+
+# def jersey_number(name)
+# 	find_players(name)[:number]
+# end
+
+
+# def team_names
+# 	team_array = []
+# 	game_hash.each do |team, data|
+# 		data.each do |attribute, value|
+# 			if attribute == :team_name
+# 				team_array.push(value)
+# 			end
+# 		end
+# 	end
+# 	team_array
+# end
+
+# def team_colors(name)
+# 	game_hash.each do |team, data|
+# 		data.each do |attribute, value|
+# 			if attribute == :team_name && value == name
+# 				data.each do |attribute, value|
+# 					if attribute == :colors
+# 						return value
+# 					end
+# 				end
+# 			end
+# 		end
+# 	end
+# end
